@@ -8,15 +8,13 @@
             "Codwelt\\Alegra\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Sergio wiesner",
-            "email": "webdev@codwelt.com"
-        }
-    ],
+    "authors": [{
+        "name": "Sergio wiesner",
+        "email": "webdev@codwelt.com"
+    }],
     "minimum-stability": "dev",
     "require": {
-        "nesbot/carbon": "^3.0@dev",
-        "guzzlehttp/guzzle": "8.0.x-dev"
+        "nesbot/carbon": "^3.0",
+        "guzzlehttp/guzzle": "8.0"
     }
 }
