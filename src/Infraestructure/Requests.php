@@ -16,40 +16,50 @@ class Requests
 
     public function get($ruta)
     {
-        try {
-            $response = $this->cliente->request('GET', $this->urls . $ruta, [
-                'headers' => [
-                    'accept' => 'application/json',
-                    'authorization' => 'Basic ' . base64_encode($this->credentials["usuario"] . ':' . $this->credentials["token"]),
-                    'content-type' => 'application/json',
-                ],
-            ]);
-            return json_decode($response->getBody(), true);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // Capturar y manejar el error
-            $responseBody = $e->getResponse()->getBody()->getContents();
-            $responseJson = json_decode($responseBody, true);
-            return $responseJson;
+        // Inicializa cURL
+        $ch = curl_init($this->urls . $ruta);
+        // Configura las opciones de la solicitud
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: application/json',
+            'Authorization: Basic ' . base64_encode($this->credentials["usuario"] . ':' . $this->credentials["token"]),
+            'Content-Type: application/json',
+        ]);
+        // Ejecuta la solicitud
+        $response = curl_exec($ch);
+        // Maneja errores
+        if (curl_errno($ch)) {
+            echo 'Error en la solicitud: ' . curl_error($ch);
+            exit;
         }
+        // Cierra la conexión
+        curl_close($ch);
+        // Retorna el resultado decodificado
+        return json_decode($response, true);
     }
     public function post($ruta, $cuerpo)
     {
-        try {
-            $response = $this->cliente->request('POST', $this->urls . $ruta, [
-                'body' => json_encode($cuerpo),
-                'headers' => [
-                    'accept' => 'application/json',
-                    'authorization' => 'Basic ' . base64_encode($this->credentials["usuario"] . ':' . $this->credentials["token"]),
-                    'content-type' => 'application/json',
-                ],
-            ]);
-
-            return json_decode($response->getBody(), true);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // Capturar y manejar el error
-            $responseBody = $e->getResponse()->getBody()->getContents();
-            $responseJson = json_decode($responseBody, true);
-            return $responseJson;
+        // Inicializa cURL
+        $ch = curl_init($this->urls . $ruta);
+        // Configura las opciones de la solicitud
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true); // Método POST
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($cuerpo)); // Establece el cuerpo de la solicitud
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: application/json',
+            'Authorization: Basic ' . base64_encode($this->credentials["usuario"] . ':' . $this->credentials["token"]),
+            'Content-Type: application/json',
+        ]);
+        // Ejecuta la solicitud
+        $response = curl_exec($ch);
+        // Maneja errores
+        if (curl_errno($ch)) {
+            echo 'Error en la solicitud: ' . curl_error($ch);
+            exit;
         }
+        // Cierra la conexión cURL
+        curl_close($ch);
+        // Retorna el resultado decodificado
+        return json_decode($response, true);
     }
 }

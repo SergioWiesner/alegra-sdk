@@ -5,7 +5,7 @@ use Codwelt\Alegra\AlegraFacade;
 
 $manager = new AlegraFacade(true);
 $manager->setCredential([
-    "usuario" => "codwelt.com2@gmail.com",
+    "usuario" => "",
     "token" => ""
 ]);
 
@@ -73,8 +73,8 @@ $resultado = $manager->contactos()->crearContacto([
     "type" => "client",
     "status" => "active"
 ]);
-
 */
+
 /**
  * LISTAR CONTACTOS
  * $manager->contactos()->listarContactos()
@@ -84,8 +84,3 @@ $resultado = $manager->contactos()->crearContacto([
  * BUSCAR CONTACTO
  * $manager->contactos()->buscarContacto(2)
  */
-
-
-
-echo "<pre>";
-var_dump($manager->contactos()->listarContactos());
