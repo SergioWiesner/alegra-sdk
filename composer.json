@@ -1,0 +1,22 @@
+{
+    "name": "codwelt/alegra",
+    "description": "Api de integración para alegra en composer",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Codwelt\\Alegra\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sergio wiesner",
+            "email": "webdev@codwelt.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "nesbot/carbon": "^3.0@dev",
+        "guzzlehttp/guzzle": "8.0.x-dev"
+    }
+}
