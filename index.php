@@ -5,8 +5,8 @@ use Codwelt\Alegra\AlegraFacade;
 
 $manager = new AlegraFacade(true);
 $manager->setCredential([
-    "usuario" => "codwelt.com@gmail.com",
-    "token" => "b81e44933af54c8df4d0"
+    "usuario" => "codwelt.com2@gmail.com",
+    "token" => ""
 ]);
 
 /**
